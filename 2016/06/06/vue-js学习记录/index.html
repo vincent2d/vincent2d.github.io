@@ -12,11 +12,11 @@
 
     <title>
         
-          周日上手Atom｜Vincent2d blog
+          vue.js学习记录｜Vincent2d blog
         
     </title>
 
-    <link rel="canonical" href="http://vincent2d.github.io/2016/06/05/周日上手Atom/">
+    <link rel="canonical" href="http://vincent2d.github.io/2016/06/06/vue-js学习记录/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -141,12 +141,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>周日上手Atom</h1>
+                    <h1>vue.js学习记录</h1>
                     
                     <span class="meta">
                          作者 Vincent2d
                          <span>
-                          日期 2016-06-05
+                          日期 2016-06-06
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -158,7 +158,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            周日上手Atom
+            vue.js学习记录
         </span>
     </div>
 </header>
@@ -170,10 +170,29 @@
                 <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
 
-                <h1 id="周日上手Atom"><a href="#周日上手Atom" class="headerlink" title="周日上手Atom"></a>周日上手Atom</h1><p>今天是个雨天，很无聊的在宿舍看《圣殿春秋》，吃晚饭后想起github还没玩得很熟悉，就从饭堂直接上到了办公室开电脑。</p>
-<p>无意中发现github上有其自己的代码编辑器，就下载了个看看。叫Atom，安装时弹出要求 .net framework，这什么鬼，只能又花了大半个小时先装了。</p>
-<p>默认代码配色很一般，特别是注释的部分在我渣渣显示器上几乎看不到，于是修改了个light的主题，有点Mac的风格，挺喜欢的。然后安装了前端必备的插件emmet，不得不说Atom 安装插件的方式比sublime方便得多了。另外下载了个叫 <strong>file-icon</strong> 的插件，能在文件名前显示一个图标，很帅。</p>
-<p>有个问题是，菜单显示调出setting的快捷键是crtl+comma，可是按ctrl和逗号键并没有反应，马克一下。</p>
+                <p>今天（201616-6-6）业余时间在github上看了一个用webpack+vue+豆瓣api做的电影webapp，觉得很酷炫，并且对于这种mvvm型的前端框架闻名已久，所以clone了一个到本地上来看一看打算再模仿一个出来。意想不到的是折腾了几个小时差点没把自己搞死。</p>
+<ol>
+<li>webpack的配置看不懂，各种import的东西也完全看不懂是干什么用的；</li>
+<li>一切都是组件化，调来调去头都晕了</li>
+<li>vue的路由插件，看别人的代码也是一头雾水</li>
+<li>有个依赖插件是检查代码格式的，一保存代码就报一大堆的错，都是什么空格换行什么的，弄的自己极其烦躁</li>
+<li>。。。</li>
+</ol>
+<p>所以，还是觉得老老实实打开了vue的官方文档，先过一遍基础知识再说。</p>
+<p><strong>2016-6-6：</strong><br>-<br><strong>1.构造器</strong></p>
+<p>vue.js的起步依赖于一个Vue的根实例。在实例化vue的时候，要<strong>传入一个选项对象</strong>，所以它的格式是这样的：</p>
+<pre><code>var vm = new Vue({
+    选项
+})
+</code></pre><p>而所谓的选项，就是类似于数据、方法、模板、挂载元素、生命周期钩子（还没完全用到，暂时不懂）等，比如data\methods\components等。</p>
+<p>这里有一种方法，就是拓展Vue的构造器，使之成为一个<strong>组件构造器</strong>。用来创建组件，比如：</p>
+<pre><code>var myComponent = Vue.extend({
+    //拓展选项
+})
+var myComponentInstance = new myComponent()
+</code></pre><p>暂时还不知道这个构造器究竟有什么用，我看到的项目是将组件export出来，然后就可以作为一个自定义的元素在模板用了，比如App.vue在被main.js这个文件import之后，再模板里这样使用<app></app>,至于为什么App.vue会被写成小写的<app>，我暂时还没查到。</app></p>
+<p> <strong>2 组件</strong></p>
+<p> 官网称组件是vue最强大的功能，我看组件就是创造出自定义的HTML元素，直接在模板上使用，达到整个应用组件化的效果，而且每个组件都包含自己的html\js\css,这样维护性就很强了，配合路由就可以做出单页面应用。</p>
 
 
                 <hr>
@@ -182,13 +201,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2016/06/06/vue-js学习记录/" data-toggle="tooltip" data-placement="top" title="vue.js学习记录">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/06/04/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                            <a href="/2016/06/05/周日上手Atom/" data-toggle="tooltip" data-placement="top" title="周日上手Atom">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -201,7 +216,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col" >
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#周日上手Atom"><span class="toc-text">周日上手Atom</span></a></li></ol>
+                    
                 </div>
             </div>
         </div>
