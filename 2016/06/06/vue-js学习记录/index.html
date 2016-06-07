@@ -190,9 +190,22 @@
     //拓展选项
 })
 var myComponentInstance = new myComponent()
-</code></pre><p>暂时还不知道这个构造器究竟有什么用，我看到的项目是将组件export出来，然后就可以作为一个自定义的元素在模板用了，比如App.vue在被main.js这个文件import之后，再模板里这样使用<app></app>,至于为什么App.vue会被写成小写的<app>，我暂时还没查到。</app></p>
+</code></pre><p>暂时还不知道这个构造器究竟有什么用，我看到的项目是将组件export出来，然后就可以作为一个自定义的元素在模板用了，比如App.vue在被main.js这个文件import之后，再模板里这样使用<app></app>,至于为什么App.vue会被写成小写的<app>，<del>我暂时还没查到</del>。</app></p>
+<blockquote>
+<p>官方解释：Vue.js 支持资源的名字使用 camelCase 或 PascalCase 的形式，并且在模板中自动将它们转为 kebab-case。</p>
+</blockquote>
 <p> <strong>2 组件</strong></p>
 <p> 官网称组件是vue最强大的功能，我看组件就是创造出自定义的HTML元素，直接在模板上使用，达到整个应用组件化的效果，而且每个组件都包含自己的html\js\css,这样维护性就很强了，配合路由就可以做出单页面应用。</p>
+<p> 问题来了，如何注册一个组件呢？刚才上面已经说了，用Vue.extend,但没有这么简单,刚才那个只是定义一个组件的构造器，必须再多做几步才能正常跑起来：</p>
+<pre><code>var MyComponent = Vue.extend({
+  // 选项...
+})
+</code></pre><p>要把这个构造器用作组件，需要用 Vue.component(tag, constructor) 注册 ：</p>
+<pre><code>//全局注册组件，tag 为 my-component，对于自定义标签名字，Vue.js 不强制要求遵循 W3C 规则（小写，并且包含一个短杠），尽管遵循这个规则比较好。
+Vue.component(&apos;my-component&apos;, MyComponent)
+</code></pre><p>实例化Vue之后，然后就可以在模板中使用 <code>&lt;my-component&gt;</code> 了<br>一个完整的过程是这样的：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;div id='app'&gt;</span><br><span class="line">    &lt;my-component&gt;&lt;/my-component&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">#定义</span><br><span class="line">var MyComponent = Vue.extend(&#123;</span><br><span class="line">    template: '&lt;p&gt;this is a component&lt;/p&gt;'</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">#注册为组件</span><br><span class="line">Vue.component('my-component',MyComponent)</span><br><span class="line"></span><br><span class="line">#创建一个根实例(这里注意的是必须在初始化根实例之前就注册了组件！)</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: '#app'</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">#渲染后：</span><br><span class="line">&lt;div id='app'&gt;</span><br><span class="line">    &lt;p&gt;this is a component&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在注册组件那一步之中，聪明的你应该想到了，有一种更简单的方法，那就是直接将选项对象作为参数传给Vue.component()。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">'my-component'</span>,&#123;</span><br><span class="line">     template: <span class="string">'&lt;p&gt;this is a component&lt;/p&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>可还是不够简单，要知道Vue应用里到处都是组件，还有组件之间的嵌套，有没有解决办法？我想就是我昨天看到的例子里使用的ES6的<strong>import\export</strong>了。这里似乎需要另外一个篇幅来学习ES6的模块化特性。后期补充。</p>
 
 
                 <hr>
@@ -203,7 +216,7 @@ var myComponentInstance = new myComponent()
                     
                     
                         <li class="next">
-                            <a href="/2016/06/05/周日上手Atom/" data-toggle="tooltip" data-placement="top" title="周日上手Atom">Next Post &rarr;</a>
+                            <a href="/2016/06/05/上手Atom/" data-toggle="tooltip" data-placement="top" title="上手Atom">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
